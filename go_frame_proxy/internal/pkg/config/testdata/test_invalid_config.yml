@@ -1,0 +1,23 @@
+---
+server:
+  port: 100
+  certFile: ./cert/server.crt
+  keyFile: ./cert/server.key
+---
+postgres:
+  pgHost: sesame.postgres.database.azure.com
+  pgDatabase: userDBx
+  pgUser: userx
+  pgPassword: Tiniwo18x
+---
+proxy:
+  - path: /get
+    host: localhost:100
+    methods:
+      - GET
+  - path: /post
+    host: localhost:200
+    methods:
+      - POST
+  - path: /yes
+    host: localhost:200
