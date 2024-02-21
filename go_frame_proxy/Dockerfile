@@ -1,5 +1,5 @@
 # Use the golang:1.19 image as the build stage
-FROM golang:1.21 AS build
+FROM golang:1.22 AS build
 
 # Copy the source code
 COPY . /app
