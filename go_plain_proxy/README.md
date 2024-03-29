@@ -1,4 +1,4 @@
-# Go Bare Proxy
+# Go Plain Proxy
 
 ## Run project
 

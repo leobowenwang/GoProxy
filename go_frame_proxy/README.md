@@ -1,4 +1,4 @@
-# Sesame Gateway
+# GoProxy
 
 TBD
 
@@ -11,14 +11,14 @@ go get
 go run cmd/main.go
 ```
 
-- test go project
+~~- test go project
 
 ```
 go test ./...
 ```
 
 
-- test go project
+- test go project~~
 
 ```
 go test ./... -cover
