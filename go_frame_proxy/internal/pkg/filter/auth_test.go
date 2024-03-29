@@ -3,7 +3,7 @@ package filter
 import (
 	"testing"
 
-	"github.com/project-sesame/sesame-gateway/internal/pkg/database"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/database"
 	"github.com/stretchr/testify/assert"
 )
 

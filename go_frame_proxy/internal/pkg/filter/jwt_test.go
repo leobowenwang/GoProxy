@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/project-sesame/sesame-gateway/internal/pkg/util"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/util"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/database"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/database"
 	"golang.org/x/crypto/bcrypt"
 )
 

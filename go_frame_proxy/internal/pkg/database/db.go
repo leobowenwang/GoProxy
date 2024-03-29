@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/config"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/util"
 	_ "github.com/lib/pq"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/config"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/util"
 )
 
 var DB *sql.DB

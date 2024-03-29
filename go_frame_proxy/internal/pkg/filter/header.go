@@ -3,7 +3,7 @@ package filter
 import (
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/util"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/util"
 	"go.uber.org/zap"
 )
 

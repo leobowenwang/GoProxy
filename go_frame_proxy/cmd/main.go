@@ -6,10 +6,10 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/config"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/database"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/filter"
-	"github.com/project-sesame/sesame-gateway/internal/pkg/util"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/config"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/database"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/filter"
+	"github.com/leobowenwang/go_frame_proxy/internal/pkg/util"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
