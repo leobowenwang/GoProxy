@@ -1,49 +1,37 @@
 package main
 
 import (
+	"fmt"
 	"io"
-	"log"
 	"net/http"
 )
 
-func handleProxy(w http.ResponseWriter, r *http.Request) {
-	targetURL := "http://localhost:8080"
-
-	req, err := http.NewRequest(r.Method, targetURL+r.URL.Path, r.Body)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	for header, values := range r.Header {
-		for _, value := range values {
-			req.Header.Add(header, value)
-		}
-	}
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer resp.Body.Close()
-
-	for header, values := range resp.Header {
-		for _, value := range values {
-			w.Header().Add(header, value)
-		}
-	}
-
-	w.WriteHeader(resp.StatusCode)
-
-	_, err = io.Copy(w, resp.Body)
-	if err != nil {
-		log.Printf("Error copying response body: %v", err)
-	}
-}
-
 func main() {
-	http.HandleFunc("/", handleProxy)
-	log.Fatal(http.ListenAndServe(":3333", nil))
+	localPort := 3333
+	remoteHost := "localhost"
+	remotePort := 8080
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		remote, err := http.NewRequest(r.Method, fmt.Sprintf("http://%s:%d%s", remoteHost, remotePort, r.URL.Path), r.Body)
+		if err != nil {
+			fmt.Println("Error creating request:", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		remote.Header = r.Header // Copy headers (excluding connection-related ones)
+
+		client := &http.Client{}
+		resp, err := client.Do(remote)
+		if err != nil {
+			fmt.Println("Error forwarding request:", err)
+			w.WriteHeader(http.StatusBadGateway)
+			return
+		}
+		defer resp.Body.Close()
+
+		io.Copy(w, resp.Body)
+	})
+
+	fmt.Println("Listening on port", localPort)
+	http.ListenAndServe(fmt.Sprintf(":%d", localPort), nil)
 }
