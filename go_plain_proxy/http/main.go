@@ -1,13 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
 
-func handleProxy(w http.ResponseWriter, r *http.Request) {
-	targetURL := "http://localhost:8080"
+func handleProxy(w http.ResponseWriter, r *http.Request, remoteHost string, remotePort int) {
+	targetURL := fmt.Sprintf("http://%s:%d", remoteHost, remotePort)
 
 	req, err := http.NewRequest(r.Method, targetURL+r.URL.Path, r.Body)
 	if err != nil {
@@ -44,6 +45,8 @@ func handleProxy(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handleProxy)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		handleProxy(w, r, "localhost", 8080)
+	})
 	log.Fatal(http.ListenAndServe(":3333", nil))
 }
